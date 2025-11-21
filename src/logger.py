@@ -1,19 +1,14 @@
+# src/logger.py
 import logging
 import os
-from datetime import datetime
 
-LOG_FILE=f"datetime.now().strftime('%m-%d-%y-%h-%M-%S').log"
-logs_path=os.path.join(os.getcwd(),"logs",LOG_FILE)
-os.makedirs(logs_path,exist_ok=True)
+# Create a logs folder if it doesn't exist
+if not os.path.exists("logs"):
+    os.makedirs("logs")
 
-LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
-
+# Configure logging
 logging.basicConfig(
-    filename=LOG_FILE_PATH,
-    format='[%(asctime)s] %(levelname)s - %(message)s',
+    filename=os.path.join("logs", "project.log"),
     level=logging.INFO,
-    filemode='a'
+    format="%(asctime)s - %(levelname)s - %(message)s"
 )
-
-if __name__ == "__main__":
-    logging.info("Logging setup complete.")
